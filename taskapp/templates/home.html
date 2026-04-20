@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 40%;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .add-btn {
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .add-btn:hover {
+            background: #5a67d8;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f7f7f7;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .done {
+            background: #28a745;
+        }
+
+        .delete {
+            background: #dc3545;
+        }
+
+        .done:hover {
+            background: #218838;
+        }
+
+        .delete:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Task Manager</h1>
+
+    <a href="/add/" class="add-btn">+ Add Task</a>
+
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <span class="{% if task.completed %}completed{% endif %}">
+                {{ task.title }}
+            </span>
+
+            <div class="actions">
+                <a href="/complete/{{ task.id }}/" class="done">Done</a>
+                <a href="/delete/{{ task.id }}/" class="delete">Delete</a>
+            </div>
+        </li>
+        {% empty %}
+        <li>No tasks yet</li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
